@@ -26,6 +26,11 @@ ARG PIP_INSTALL_ARGS="\
     --no-cache-dir \
     "
 
+ARG PIP_MODULES="\
+    netaddr \
+    treelib \
+    "
+
 ARG MOLECULE_EXTRAS="docker"
 
 ADD ./molecule-runner.sh /root/
