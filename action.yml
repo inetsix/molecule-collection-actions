@@ -1,15 +1,16 @@
-# molecule-collection-actions
-
-First GitHub action allows you to run Molecule to test Ansible role.
-
-## Inputs
-
-```yaml
 ---
+name: Ansible Molecule with collection support
+description: Run Ansible Molecule with collection support
+author: Thomas Grimonet <thomas.grimonet@gmail.com>
+
+branding:
+  icon: upload
+  color: green
+
+inputs:
   molecule_parentdir:
     description: Relative path where your molecule folder is.
     required: no
-
   molecule_options:
     description: |
       Options:
@@ -62,24 +63,6 @@ First GitHub action allows you to run Molecule to test Ansible role.
       any requirements prior to run molecule
     required: false
 
-```
-
-## Usage
-
-To use the action simply create an main.yml (or choose custom *.yml name) in the .github/workflows/ directory.
-Basic example:
-
-```yaml
-on: push
-
-jobs:
-  molecule:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          path: "${{ github.repository }}"
-      - uses: titom73/molecule-collection-actions@master
-```
-
-NOTE: the checkout action needs to place the file in ${{ github.repository }} in order for Molecule to find your role.
+runs:
+  using: docker
+  image: docker://titom73/molecule-actions:latest
