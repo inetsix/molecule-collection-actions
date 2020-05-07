@@ -2,3 +2,4 @@
 */ansible_collections/*
 .ansible*
 .cache
+requirements.txt
