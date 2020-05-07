@@ -17,7 +17,6 @@ First GitHub action allows you to run Molecule to test Ansible role.
         -c, --base-config TEXT  Path to a base config.  If provided Molecule will
                                 load this config first, and deep merge each
                                 scenario's molecule.yml on top.
-                                (/home/gofrolist/.config/molecule/config.yml)
         -e, --env-file TEXT     The file to read variables from when rendering
                                 molecule.yml. (.env.yml)
         --version               Show the version and exit.
@@ -76,10 +75,36 @@ jobs:
   molecule:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run molecule action
+        uses: titom73/molecule-collection-actions@master
         with:
-          path: "${{ github.repository }}"
-      - uses: titom73/molecule-collection-actions@master
+          molecule_parentdir: 'ansible_collections/arista/cvp'
+          molecule_command: 'test'
+          molecule_args: '--all'
+          pip_file: 'requirements.txt'
 ```
 
-NOTE: the checkout action needs to place the file in ${{ github.repository }} in order for Molecule to find your role.
+## Local testing
+
+To test action execution locally, configure variables in a file:
+
+```shell
+# cat test.env
+INPUT_PIP_FILE=requirements.txt
+INPUT_MOLECULE_PARENTDIR=/root/ansible_collections/arista/cvp
+INPUT_MOLECULE_COMMAND=test
+INPUT_MOLECULE_ARGS=--all
+```
+
+Then run docker container:
+
+```shell
+docker run --rm -it \
+    -v ${PWD}:/root/ \                              # Local content shared with container
+    -v /var/run/docker.sock:/var/run/docker.sock \  # Docker process required by molecule
+    --env-file dev.env \                            # File with your variables
+    titom73/molecule-actions:latest
+```

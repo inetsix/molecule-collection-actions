@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Purpose: Molecule runner for github-action
 # Author: @titom73
@@ -8,21 +8,18 @@
 # --------------------------------------
 
 # export MOLECULE_BIN=$(which molecule)
+echo "Script running from ${PWD}"
 
-# # If user define any requirements file in options, we install them
-# if [[ -v INPUT_PIP_FILE ]]; then
-#     if [[ -f ${INPUT_PIP_FILE} ]]; then
-#         pip install -r ${INPUT_PIP_FILE}
-#     fi
-# fi
-
-cd ${GITHUB_REPOSITORY}
-# Set default value for where to find MOLECULE folder
-if [[ ! -z INPUT_MOLECULE_PARENT_DIR ]]; then
-    cd ${INPUT_MOLECULE_PARENT_DIR}
+# If user define any requirements file in options, we install them
+if [[ -f ${INPUT_PIP_FILE} ]]; then
+    echo 'installing custom requirements file ...'
+    # pip install -r ${INPUT_PIP_FILE}
 fi
 
-echo $PWD
+# Set default value for where to find MOLECULE folder
+cd ${INPUT_MOLECULE_PARENTDIR}
+echo "Current working dir: $PWD"
 
-# # Run Molecule scenario
-# ${MOLECULE_BIN} ${INPUT_MOLECULE_OPTIONS} ${INPUT_MOLECULE_COMMAND} ${INPUT_MOLECULE_ARGS}
+# Run Molecule scenario
+echo "Running: molecule ${INPUT_MOLECULE_OPTIONS} ${INPUT_MOLECULE_COMMAND} ${INPUT_MOLECULE_ARGS}"
+molecule ${INPUT_MOLECULE_OPTIONS} ${INPUT_MOLECULE_COMMAND} ${INPUT_MOLECULE_ARGS}

@@ -10,7 +10,9 @@ branding:
 inputs:
   molecule_parentdir:
     description: Relative path where your molecule folder is.
-    required: no
+    required: true
+    default: '.'
+
   molecule_options:
     description: |
       Options:

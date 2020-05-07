@@ -33,11 +33,13 @@ ARG PIP_MODULES="\
 
 ARG MOLECULE_EXTRAS="docker"
 
-ADD ./molecule-runner.sh /root/
+ADD molecule-runner.sh /root/molecule-runner.sh
 
 RUN apk add --update --no-cache ${BUILD_DEPS} ${PACKAGES} && \
     pip install ${PIP_INSTALL_ARGS} ${PIP_MODULES} "molecule[${MOLECULE_EXTRAS}]" && \
     apk del --no-cache ${BUILD_DEPS} && \
-    rm -rf /root/.cache
+    rm -rf /root/.cache && \
+    chmod 755 /root/molecule-runner.sh
 
-CMD ['/root/molecule-runner.sh']
+# ENTRYPOINT ["sh","-c",'/root/molecule-runner.sh']
+CMD ["sh", "/root/molecule-runner.sh"]

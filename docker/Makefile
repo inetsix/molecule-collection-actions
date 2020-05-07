@@ -14,8 +14,7 @@ build: ## Build docker image
 
 .PHONY: run
 run: ## run docker image
-	docker run --rm -it \
-		-v $(DOCKER_BASE)/$(DOCKER_NAME):$(DOCKER_TAG)
+	docker run --rm -it -v ${PWD}:/root/ -v /var/run/docker.sock:/var/run/docker.sock --env-file dev.env $(DOCKER_BASE)/$(DOCKER_NAME):$(DOCKER_TAG)
 
 .PHONY: exec
 exec: ## exec docker image

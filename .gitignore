@@ -1,0 +1,4 @@
+*.retry
+*/ansible_collections/*
+.ansible*
+.cache
