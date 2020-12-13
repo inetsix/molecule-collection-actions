@@ -1,6 +1,8 @@
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/titom73/molecule-collection-actions) ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/titom73/molecule-actions) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/titom73/molecule-actions) ![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/titom73/molecule-actions) ![Docker Pulls](https://img.shields.io/docker/pulls/titom73/molecule-actions) ![GitHub](https://img.shields.io/github/license/titom73/molecule-collection-actions)
+
 # molecule-collection-actions
 
-First GitHub action allows you to run Molecule to test Ansible role.
+First GitHub action allows you to run [Molecule](https://molecule.readthedocs.io/en/latest/) using [ansible collection](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html) structure.
 
 ## Inputs
 
@@ -12,7 +14,7 @@ First GitHub action allows you to run Molecule to test Ansible role.
 
   molecule_options:
     description: |
-      Options:
+      Supported options:
         --debug / --no-debug    Enable or disable debug mode. Default is disabled.
         -c, --base-config TEXT  Path to a base config.  If provided Molecule will
                                 load this config first, and deep merge each
@@ -25,7 +27,7 @@ First GitHub action allows you to run Molecule to test Ansible role.
 
   molecule_command:
     description: |
-      Commands:
+      Supported commands:
         check        Use the provisioner to perform a Dry-Run...
         cleanup      Use the provisioner to cleanup any changes...
         converge     Use the provisioner to configure instances...
@@ -48,7 +50,7 @@ First GitHub action allows you to run Molecule to test Ansible role.
 
   molecule_args:
     description: |
-      Arguments:
+      Supported arguments:
         --scenario-name foo  Targeting a specific scenario.
         --driver-name foo    Targeting a specific driver.
         --all                Target all scenarios.

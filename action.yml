@@ -65,6 +65,12 @@ inputs:
       any requirements prior to run molecule
     required: false
 
+  check_git:
+    description: |
+      Check git status after molecule execution.
+      Help to track unexpected changes between 2 commits.
+    required: false
+
 runs:
   using: docker
   image: docker://titom73/molecule-actions:latest

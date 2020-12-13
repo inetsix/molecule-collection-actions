@@ -22,4 +22,25 @@ echo "Current working dir: $PWD"
 
 # Run Molecule scenario
 echo "Running: molecule ${INPUT_MOLECULE_OPTIONS} ${INPUT_MOLECULE_COMMAND} ${INPUT_MOLECULE_ARGS}"
+molecule --version
 molecule ${INPUT_MOLECULE_OPTIONS} ${INPUT_MOLECULE_COMMAND} ${INPUT_MOLECULE_ARGS}
+
+if [ -n ${INPUT_CHECK_GIT} ]; then
+    echo "  * Run Git Verifier because CHECK_GIT is set to ${INPUT_CHECK_GIT}"
+    # if git diff-index --quiet HEAD --; then
+    if [[ `git status --porcelain` ]]; then
+        # No changes
+        echo 'Some changes'
+        echo '------------'
+        git --no-pager status --short
+        echo ''
+        echo 'Diffs are:'
+        echo '------------'
+        git --no-pager diff
+        exit 1
+    else
+        # Changes
+        echo 'No change'
+        exit 0
+    fi
+fi
