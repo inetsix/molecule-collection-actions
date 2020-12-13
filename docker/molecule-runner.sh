@@ -18,6 +18,7 @@ fi
 
 # Set default value for where to find MOLECULE folder
 cd ${INPUT_MOLECULE_PARENTDIR}
+chmod 777 -R ${INPUT_MOLECULE_PARENTDIR}
 echo "Current working dir: $PWD"
 
 # Run Molecule scenario
