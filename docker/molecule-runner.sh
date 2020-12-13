@@ -17,7 +17,7 @@ if [[ -f ${INPUT_PIP_FILE} ]]; then
 fi
 
 # Set default value for where to find MOLECULE folder
-chmod 777 -R ${INPUT_MOLECULE_PARENTDIR}
+chmod 777 -R ${PWD}
 cd ${INPUT_MOLECULE_PARENTDIR}
 echo "Current working dir: $PWD"
 
@@ -31,7 +31,7 @@ chmod 777 -R ${PWD}
 if [ -n ${INPUT_CHECK_GIT} ]; then
     echo "  * Run Git Verifier because CHECK_GIT is set to ${INPUT_CHECK_GIT}"
     # if git diff-index --quiet HEAD --; then
-    if [[ `git status --porcelain` ]]; then
+    if [[ `git status` ]]; then
         # No changes
         echo 'Some changes'
         echo '------------'
