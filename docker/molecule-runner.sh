@@ -17,14 +17,16 @@ if [[ -f ${INPUT_PIP_FILE} ]]; then
 fi
 
 # Set default value for where to find MOLECULE folder
-cd ${INPUT_MOLECULE_PARENTDIR}
 chmod 777 -R ${INPUT_MOLECULE_PARENTDIR}
+cd ${INPUT_MOLECULE_PARENTDIR}
 echo "Current working dir: $PWD"
 
 # Run Molecule scenario
 echo "Running: molecule ${INPUT_MOLECULE_OPTIONS} ${INPUT_MOLECULE_COMMAND} ${INPUT_MOLECULE_ARGS}"
 molecule --version
 molecule ${INPUT_MOLECULE_OPTIONS} ${INPUT_MOLECULE_COMMAND} ${INPUT_MOLECULE_ARGS}
+
+chmod 777 -R ${PWD}
 
 if [ -n ${INPUT_CHECK_GIT} ]; then
     echo "  * Run Git Verifier because CHECK_GIT is set to ${INPUT_CHECK_GIT}"
