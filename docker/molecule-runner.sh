@@ -31,7 +31,7 @@ chmod 777 -R ${PWD}
 if [ -n ${INPUT_CHECK_GIT} ]; then
     echo "  * Run Git Verifier because CHECK_GIT is set to ${INPUT_CHECK_GIT}"
     # if git diff-index --quiet HEAD --; then
-    if [[ `git status` ]]; then
+    if [[ `git status --porcelain` ]]; then
         # No changes
         echo 'Some changes'
         echo '------------'
