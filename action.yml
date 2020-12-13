@@ -71,6 +71,11 @@ inputs:
       Help to track unexpected changes between 2 commits.
     required: false
 
+  check_git_enforced:
+    description: |
+      If set to to true, then exit code is based on git status.
+    required: false
+
 runs:
   using: docker
   image: docker://titom73/molecule-actions:latest

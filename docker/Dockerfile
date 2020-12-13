@@ -41,5 +41,9 @@ RUN apk add --update --no-cache ${BUILD_DEPS} ${PACKAGES} && \
     rm -rf /root/.cache && \
     chmod 755 /root/molecule-runner.sh
 
+WORKDIR /projects
+VOLUME ["/projects"]
+RUN chmod 777 /projects
+
 # ENTRYPOINT ["sh","-c",'/root/molecule-runner.sh']
 CMD ["sh", "/root/molecule-runner.sh"]
