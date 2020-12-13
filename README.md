@@ -63,6 +63,16 @@ First GitHub action allows you to run [Molecule](https://molecule.readthedocs.io
       any requirements prior to run molecule
     required: false
 
+  check_git:
+    description: |
+      Check git status after molecule execution.
+      Help to track unexpected changes between 2 commits.
+    required: false
+
+  check_git_enforced:
+    description: |
+      If set to to true, then exit code is based on git status.
+    required: false
 ```
 
 ## Usage
@@ -81,7 +91,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run molecule action
-        uses: titom73/molecule-collection-actions@master
+        uses: titom73/molecule-collection-actions@v1
         with:
           molecule_parentdir: 'ansible_collections/arista/cvp'
           molecule_command: 'test'
@@ -108,5 +118,5 @@ docker run --rm -it \
     -v ${PWD}:/root/ \                              # Local content shared with container
     -v /var/run/docker.sock:/var/run/docker.sock \  # Docker process required by molecule
     --env-file dev.env \                            # File with your variables
-    titom73/molecule-actions:latest
+    titom73/molecule-actions:v2.0.0
 ```
