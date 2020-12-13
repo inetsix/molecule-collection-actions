@@ -26,6 +26,7 @@ molecule --version
 molecule ${INPUT_MOLECULE_OPTIONS} ${INPUT_MOLECULE_COMMAND} ${INPUT_MOLECULE_ARGS}
 
 if [ ${INPUT_CHECK_GIT} = "true" ]; then
+    git config core.fileMode false
     echo "  * Run Git Verifier because CHECK_GIT is set to ${INPUT_CHECK_GIT}"
     # if git diff-index --quiet HEAD --; then
     if [ -n "$(git status --porcelain)" ]; then
