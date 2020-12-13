@@ -1,4 +1,5 @@
-FROM python:3.7-alpine
+# FROM python:3.7-alpine
+FROM avdteam/base:3.6
 
 LABEL "maintainer"="Thomas Grimonet <thomas.grimonet@gmail.com>"
 LABEL "repository"="https://github.com/titom73/molecule-collection-actions"
@@ -9,41 +10,12 @@ LABEL "com.github.actions.description"="Run Ansible Molecule"
 LABEL "com.github.actions.icon"="upload"
 LABEL "com.github.actions.color"="green"
 
-ARG BUILD_DEPS="\
-    gcc \
-    libc-dev \
-    make \
-    musl-dev \
-    libffi-dev \
-    openssl-dev \
-    "
-ARG PACKAGES="\
-    docker \
-    git \
-    openssh-client \
-    "
-ARG PIP_INSTALL_ARGS="\
-    --no-cache-dir \
-    "
+USER avd
 
-ARG PIP_MODULES="\
-    netaddr \
-    treelib \
-    "
-
-ARG MOLECULE_EXTRAS="docker"
-
-ADD molecule-runner.sh /root/molecule-runner.sh
-
-RUN apk add --update --no-cache ${BUILD_DEPS} ${PACKAGES} && \
-    pip install ${PIP_INSTALL_ARGS} ${PIP_MODULES} "molecule[${MOLECULE_EXTRAS}]" && \
-    apk del --no-cache ${BUILD_DEPS} && \
-    rm -rf /root/.cache && \
-    chmod 755 /root/molecule-runner.sh
+ADD molecule-runner.sh /home/avd/molecule-runner.sh
 
 WORKDIR /projects
 VOLUME ["/projects"]
-RUN chmod 777 /projects
 
 # ENTRYPOINT ["sh","-c",'/root/molecule-runner.sh']
-CMD ["sh", "/root/molecule-runner.sh"]
+CMD ["sh", "/home/avd/molecule-runner.sh"]

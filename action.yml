@@ -70,11 +70,13 @@ inputs:
       Check git status after molecule execution.
       Help to track unexpected changes between 2 commits.
     required: false
+    default: 'false'
 
   check_git_enforced:
     description: |
       If set to to true, then exit code is based on git status.
     required: false
+    default: 'false'
 
 runs:
   using: docker
