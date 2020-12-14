@@ -15,7 +15,7 @@ echo "Script running from ${PWD}"
 # If user define any requirements file in options, we install them
 if [ -f ${INPUT_PIP_FILE} ]; then
     echo 'installing custom requirements file ...'
-    pip install --user -r ${INPUT_PIP_FILE}
+    pip install -r ${INPUT_PIP_FILE}
 fi
 
 # Set default value for where to find MOLECULE folder
