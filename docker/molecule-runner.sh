@@ -7,7 +7,9 @@
 # License: BSD
 # --------------------------------------
 
-# export MOLECULE_BIN=$(which molecule)
+
+export PATH=$(echo "$PATH" | sed -e 's/:\/home\/avd\/.local\/bin//')
+export MOLECULE_BIN=$(/root/.local/bin/molecule)
 echo "Script running from ${PWD}"
 
 # If user define any requirements file in options, we install them
@@ -22,8 +24,8 @@ echo "Current working dir: $PWD"
 
 # Run Molecule scenario
 echo "Running: molecule ${INPUT_MOLECULE_OPTIONS} ${INPUT_MOLECULE_COMMAND} ${INPUT_MOLECULE_ARGS}"
-molecule --version
-molecule ${INPUT_MOLECULE_OPTIONS} ${INPUT_MOLECULE_COMMAND} ${INPUT_MOLECULE_ARGS}
+${MOLECULE_BIN} --version
+${MOLECULE_BIN} ${INPUT_MOLECULE_OPTIONS} ${INPUT_MOLECULE_COMMAND} ${INPUT_MOLECULE_ARGS}
 
 if [ ${INPUT_CHECK_GIT} = "true" ]; then
     git config core.fileMode false

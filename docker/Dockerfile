@@ -12,11 +12,9 @@ LABEL "com.github.actions.color"="green"
 
 USER root
 
-ADD molecule-runner.sh /home/avd/molecule-runner.sh
-
+ADD molecule-runner.sh /bin/molecule-runner.sh
 
 RUN cp -r /home/avd/.local /root/ && \
-    echo 'export PATH=$PATH:/root/.local/bin' >> $HOME/.bashrc
+    echo "export PATH=$(echo "$PATH" | sed -e 's/:\/home\/avd\/.local\/bin//'):/root/.local/bin" >> $HOME/.bashrc
 
-# ENTRYPOINT ["sh","-c",'/root/molecule-runner.sh']
-ENTRYPOINT ["sh", "-c", "/home/avd/molecule-runner.sh"]
+ENTRYPOINT ["sh", "-c", "/bin/molecule-runner.sh"]
