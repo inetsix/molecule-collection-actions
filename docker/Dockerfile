@@ -10,12 +10,13 @@ LABEL "com.github.actions.description"="Run Ansible Molecule"
 LABEL "com.github.actions.icon"="upload"
 LABEL "com.github.actions.color"="green"
 
-USER avd
+USER root
 
 ADD molecule-runner.sh /home/avd/molecule-runner.sh
 
-WORKDIR /projects
-VOLUME ["/projects"]
+
+RUN cp -r /home/avd/.local /root/ && \
+    echo 'export PATH=$PATH:/root/.local/bin' >> $HOME/.bashrc
 
 # ENTRYPOINT ["sh","-c",'/root/molecule-runner.sh']
-CMD ["sh", "/home/avd/molecule-runner.sh"]
+ENTRYPOINT ["sh", "-c", "/home/avd/molecule-runner.sh"]
