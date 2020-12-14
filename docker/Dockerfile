@@ -10,6 +10,8 @@ LABEL "com.github.actions.description"="Run Ansible Molecule"
 LABEL "com.github.actions.icon"="upload"
 LABEL "com.github.actions.color"="green"
 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends build-essential wget git
 RUN pip install --upgrade pip molecule molecule-docker
 ADD molecule-runner.sh /bin/molecule-runner.sh
 
