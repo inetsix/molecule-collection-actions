@@ -9,7 +9,6 @@
 
 
 export PATH=$(echo "$PATH" | sed -e 's/:\/home\/avd\/.local\/bin//'):/root/.local/bin
-export MOLECULE_BIN='/root/.local/bin/molecule'
 echo "Script running from ${PWD}"
 
 # If user define any requirements file in options, we install them
@@ -17,6 +16,8 @@ if [ -f ${INPUT_PIP_FILE} ]; then
     echo 'installing custom requirements file ...'
     pip install -r ${INPUT_PIP_FILE}
 fi
+
+export MOLECULE_BIN=$(which molecule)
 
 # Set default value for where to find MOLECULE folder
 cd ${INPUT_MOLECULE_PARENTDIR}
