@@ -9,7 +9,7 @@
 
 
 export PATH=$(echo "$PATH" | sed -e 's/:\/home\/avd\/.local\/bin//')
-export MOLECULE_BIN=$(/root/.local/bin/molecule)
+export MOLECULE_BIN='/root/.local/bin/molecule'
 echo "Script running from ${PWD}"
 
 # If user define any requirements file in options, we install them
