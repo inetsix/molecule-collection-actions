@@ -1,8 +1,10 @@
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/titom73/molecule-collection-actions) ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/titom73/molecule-actions) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/titom73/molecule-actions) ![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/titom73/molecule-actions) ![Docker Pulls](https://img.shields.io/docker/pulls/titom73/molecule-actions) ![GitHub](https://img.shields.io/github/license/titom73/molecule-collection-actions)
 
-# molecule-collection-actions
+# Github  Action for Molecule
 
 First GitHub action allows you to run [Molecule](https://molecule.readthedocs.io/en/latest/) using [ansible collection](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html) structure.
+
+In addition, this GH action supports GIT status after Molecule execution to help to track unexpected file changes. This check can be enforced and generate a failure if a change is detected.
 
 ## Inputs
 
@@ -91,7 +93,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run molecule action
-        uses: titom73/molecule-collection-actions@v1
+        uses: titom73/molecule-actions@v2.0.0
         with:
           molecule_parentdir: 'ansible_collections/arista/cvp'
           molecule_command: 'test'

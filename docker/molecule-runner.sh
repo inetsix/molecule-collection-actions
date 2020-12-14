@@ -8,13 +8,18 @@
 # --------------------------------------
 
 
-export PATH=$(echo "$PATH" | sed -e 's/:\/home\/avd\/.local\/bin//'):/root/.local/bin
+# export PATH=$(echo "$PATH" | sed -e 's/:\/home\/avd\/.local\/bin//')
 echo "Script running from ${PWD}"
 
 # If user define any requirements file in options, we install them
-if [ -f ${INPUT_PIP_FILE} ]; then
+if [ ${INPUT_PIP_FILE} != '' ] 2> /dev/null && [ -f ${INPUT_PIP_FILE} ]; then
     echo 'installing custom requirements file ...'
-    pip install -r ${INPUT_PIP_FILE}
+    echo 'PIP file is set to : '${INPUT_PIP_FILE}
+    # Workaround for https://github.com/ansible/ansible/issues/70348
+    pip install --upgrade -r ${INPUT_PIP_FILE}
+    if grep -Fxq 'ansible' "${INPUT_PIP_FILE}"; then
+        pip install --upgrade --yes ansible
+    fi
 fi
 
 export MOLECULE_BIN=$(which molecule)
@@ -47,9 +52,11 @@ if [ ${INPUT_CHECK_GIT} = "true" ]; then
             exit 0
         fi
     else
-        # Changes
-        echo 'No change'
+        # No Changes
+        echo '    - No change found after running Molecule'
         exit 0
     fi
     exit 0
+else
+    echo "  * Git verifier skipped as not set to true"
 fi

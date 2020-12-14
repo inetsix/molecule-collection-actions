@@ -64,6 +64,7 @@ inputs:
       Relative path from `${GITHUB_REPOSITORY}` to install
       any requirements prior to run molecule
     required: false
+    default: ''
 
   check_git:
     description: |
