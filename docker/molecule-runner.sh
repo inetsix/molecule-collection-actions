@@ -8,7 +8,7 @@
 # --------------------------------------
 
 
-export PATH=$(echo "$PATH" | sed -e 's/:\/home\/avd\/.local\/bin//')
+export PATH=$(echo "$PATH" | sed -e 's/:\/home\/avd\/.local\/bin//'):/root/.local/bin
 export MOLECULE_BIN='/root/.local/bin/molecule'
 echo "Script running from ${PWD}"
 
