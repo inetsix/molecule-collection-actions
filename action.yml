@@ -81,4 +81,4 @@ inputs:
 
 runs:
   using: docker
-  image: docker://titom73/molecule-actions:latest
+  image: docker://titom73/molecule-actions:v2.0.0
