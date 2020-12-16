@@ -93,7 +93,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run molecule action
-        uses: titom73/molecule-actions@v2.0.0
+        uses: inetsix/molecule-actions@v2.0.0
         with:
           molecule_parentdir: 'ansible_collections/arista/cvp'
           molecule_command: 'test'
